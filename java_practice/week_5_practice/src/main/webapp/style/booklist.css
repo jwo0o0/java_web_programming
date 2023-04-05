@@ -1,0 +1,30 @@
+div.flex {
+    display: flex;
+}
+div.box {
+    width: 500px;
+    border-bottom: 1px solid gray;
+    height: 25px;
+    line-height: 25px;
+}
+div.index {
+    background-color: aliceblue;
+    height: 30px;
+    line-height: 30px;
+    font-weight: 600;
+}
+div.center {
+    text-align: center;
+}
+div.bookId {
+    width: 70px;
+}
+div.title {
+    width: 250px;
+}
+div.publisher {
+    width: 100px;
+}
+div.price {
+    width: 100px;
+}
