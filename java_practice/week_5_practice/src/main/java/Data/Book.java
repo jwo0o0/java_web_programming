@@ -1,10 +1,12 @@
 package Data;
 
+import java.util.Date;
 public class Book {
     private int bookId;
     private String title;
     private String publisher;
     private int price;
+    private Date date;
 
     public int getBookId() {
         return bookId;
@@ -38,10 +40,19 @@ public class Book {
         this.price = price;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     public Book(int bookId, String title, String publisher, int price) {
         setBookId(bookId);
         setTitle(title);
         setPublisher(publisher);
         setPrice(price);
+        setDate(new Date());
     }
 }

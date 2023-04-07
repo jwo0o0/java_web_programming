@@ -1,4 +1,3 @@
-<%@ page errorPage="error/error.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 5주차 - JSP와 JSTL을 활용한 도서 정보 시스템

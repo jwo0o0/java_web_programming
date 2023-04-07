@@ -1,6 +1,6 @@
-<%@ page errorPage="error/error.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fd" tagdir="/WEB-INF/tags" %>
 <%
   response.setContentType("text/html;charset=UTF-8");
   request.setCharacterEncoding("UTF-8");
@@ -8,7 +8,7 @@
 <html>
 <head>
     <title>도서 목록</title>
-    <link href="../style/booklist.css" rel="stylesheet" type="text/css">
+    <link href="../style/list.css" rel="stylesheet" type="text/css">
 </head>
 <body>
   <h2>도서 목록</h2>
@@ -35,11 +35,25 @@
     books = (ArrayList<Book>) session.getAttribute("books");
   %>
 
+  <%!
+    //가격이 숫자가 아닌 값이 입력된 경우 NumberFormatException 발생 처리
+    int price;
+  %>
+  <c:catch var="exception">
+    <% price = Integer.parseInt(request.getParameter("price")); %>
+  </c:catch>
+  <c:if test="${exception != null}" >
+    <p>
+      <span style="font-weight: bold">* 올바르지 않은 가격이 입력되었습니다.</span><br />
+      exception 발생: ${exception}
+    </p>
+    <% price = 0; //가격 0으로 설정 %>
+  </c:if>
+
   <%
     //request로 받은 새로운 책 정보로 Book 인스턴스 생성 후 books 배열에 추가
     String title = request.getParameter("title");
     String publisher = request.getParameter("publisher");
-    int price = Integer.parseInt(request.getParameter("price"));
 
     Book newBook = new Book(books.size() + 1, title, publisher, price);
     books.add(newBook);
@@ -52,6 +66,7 @@
     <div class="title">도서 이름</div>
     <div class="publisher">출판사</div>
     <div class="price">가격</div>
+    <div class="date">등록 날짜</div>
   </div>
 
   <!-- session에서 가져온 도서 배열 JSTL로 출력 -->
@@ -61,6 +76,7 @@
       <div class="title">${book.getTitle()}</div>
       <div class="publisher">${book.getPublisher()}</div>
       <div class="price">${book.getPrice()}</div>
+      <div class="date"><fd:formatDate value="${book.getDate()}" /></div>
     </div>
   </c:forEach>
 <br>

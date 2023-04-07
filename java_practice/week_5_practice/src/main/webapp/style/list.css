@@ -2,7 +2,7 @@ div.flex {
     display: flex;
 }
 div.box {
-    width: 500px;
+    width: 650px;
     border-bottom: 1px solid gray;
     height: 25px;
     line-height: 25px;
@@ -17,7 +17,7 @@ div.center {
     text-align: center;
 }
 div.bookId {
-    width: 70px;
+    width: 75px;
 }
 div.title {
     width: 250px;
