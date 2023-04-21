@@ -1,7 +1,7 @@
 package Controller;
 
 import java.sql.*;
-import com.example.week_7_practice.MyDB;
+import com.week_7_practice.MyDB;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;

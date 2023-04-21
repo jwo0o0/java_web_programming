@@ -1,4 +1,4 @@
-<%@ page import="com.example.week_7_practice.MyDB" %>
+<%@ page import="com.week_7_practice.MyDB" %>
 <%@ page import="java.sql.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>

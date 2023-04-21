@@ -1,4 +1,4 @@
-package com.example.week_7_practice;
+package com.week_7_practice;
 
 import java.sql.*;
 

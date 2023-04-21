@@ -1,6 +1,6 @@
 package Controller;
 
-import com.example.week_7_practice.MyDB;
+import com.week_7_practice.MyDB;
 
 import java.sql.*;
 import javax.servlet.ServletConfig;
