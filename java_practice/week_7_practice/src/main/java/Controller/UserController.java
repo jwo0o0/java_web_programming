@@ -102,8 +102,7 @@ public class UserController extends HttpServlet {
 
         //DB 연결 생성
         Connection con = mydb.getCon();
-        StringBuilder sb = new StringBuilder();
-        String query = sb.append("SELECT * FROM User WHERE name ='").append(name).append("';").toString();
+        String query = "SELECT * FROM User WHERE name=\'" + name + "\';";
 
         boolean loginResult = false;
         String userId = "0";
@@ -113,7 +112,6 @@ public class UserController extends HttpServlet {
             ResultSet rs = stmt.executeQuery(query);
             //유저가 존재하고 비밀번호도 일치하는 경우
             if (rs.next()) {
-                System.out.println("존재");
                 String DBpassword = rs.getString(3);
                 userId = rs.getString(1);
                 if (password.equals(DBpassword)) loginResult = true;
@@ -126,10 +124,10 @@ public class UserController extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("isLogin", true);
             session.setAttribute("userId", userId);
-            System.out.println("로그인 성공");
+            System.out.println(">> 로그인 성공");
             return "/index.jsp";
         } else {
-            System.out.println("로그인 실패");
+            System.out.println(">> 로그인 실패");
             return "/login.jsp";
         }
     }
@@ -143,13 +141,8 @@ public class UserController extends HttpServlet {
         return "/index.jsp";
     }
 
+    //회원정보 수정
     private String edit(HttpServletRequest request, HttpServletResponse response) {
-        //수정할 유저 정보
-        String nameQuery = "name = \'" + request.getParameter("name") + "',";
-        String passwordQuery = "password = \'" +request.getParameter("password") + "',";
-        String addressQuery = "address = \'" +request.getParameter("address") + "',";
-        String phoneQuery = "phone = \'" +request.getParameter("phone") + "'";
-
         //현재 로그인한 유저 아이디
         HttpSession session = request.getSession();
         String currentUserId = (String)session.getAttribute("userId");
@@ -159,11 +152,15 @@ public class UserController extends HttpServlet {
         //처리 결과
         int result = 0;
 
-        String query = "UPDATE User SET " + nameQuery + passwordQuery + addressQuery + phoneQuery + "WHERE userID=" + currentUserId + ";";
+        String query = "UPDATE User SET name = ?, password = ?, address = ?, phone = ? WHERE userId =" + currentUserId;
 
         try {
-            Statement stmt = con.createStatement();
-            result = stmt.executeUpdate(query);
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, request.getParameter("name"));
+            ps.setString(2, request.getParameter("password"));
+            ps.setString(3, request.getParameter("address"));
+            ps.setString(4, request.getParameter("phone"));
+            result = ps.executeUpdate();
             System.out.println(">> 회원정보 수정 완료");
         } catch (SQLException e) {
             e.printStackTrace();

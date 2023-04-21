@@ -67,7 +67,7 @@ public class BookController extends HttpServlet {
         Connection con = mydb.getCon();
         //책 아이디
         String bookId = request.getParameter("bookId");
-        String query = "SELECT * FROM Book WHERE bookId = \'" + bookId + "\'";
+        String query = "SELECT * FROM Book WHERE bookId =" + bookId;
 
         try {
             Statement stmt = con.createStatement();

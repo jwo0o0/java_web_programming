@@ -27,7 +27,6 @@
         e.printStackTrace();
     }
     rs.next();
-    System.out.println(rs.getString(2) + rs.getString(4) + rs.getString(5));
 %>
 <p>
     <div>

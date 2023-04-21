@@ -50,8 +50,6 @@ public class OrderController extends HttpServlet {
         String userId = (String) session.getAttribute("userId");
         String bookId = request.getParameter("bookId");
 
-        System.out.println("책 구매: " + userId + bookId);
-
         //DB 연결
         Connection con = mydb.getCon();
         //책 정보 가져오기
