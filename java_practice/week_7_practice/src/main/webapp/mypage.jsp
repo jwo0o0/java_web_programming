@@ -9,23 +9,12 @@
 <jsp:include page="header.jsp" />
 <h3>마이페이지</h3>
 <%!
-    MyDB mydb;
-    Connection con;
     ResultSet rs;
     String userId;
 %>
 <%
     userId = (String) session.getAttribute("userId");
-
-    mydb = new MyDB();
-    con = mydb.getCon();
-
-    try {
-        Statement stmt = con.createStatement();
-        rs = stmt.executeQuery("SELECT * FROM User WHERE userId=\'" + userId +"\';");
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
+    rs = (ResultSet) request.getAttribute("info");
     rs.next();
 %>
 <p>

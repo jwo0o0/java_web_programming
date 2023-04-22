@@ -25,7 +25,7 @@
     <a href="/">홈</a>
     <c:choose>
         <c:when test="${isLogin}">
-            <a href="/mypage.jsp">마이페이지</a>
+            <a href="/user?action=info&userId=${userId}">마이페이지</a>
             <a href="/user?action=logout">로그아웃</a>
             <a href="/order?action=list">장바구니</a>
         </c:when>

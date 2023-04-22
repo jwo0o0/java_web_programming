@@ -47,6 +47,10 @@ public class UserController extends HttpServlet {
                     view = logout(request, response);
                     break;
                 }
+                case "info": {
+                    view = info(request, response);
+                    break;
+                }
                 case "edit": {
                     view = edit(request, response);
                     break;
@@ -141,6 +145,24 @@ public class UserController extends HttpServlet {
         return "/index.jsp";
     }
 
+    //회원정보 조회
+    private String info(HttpServletRequest request, HttpServletResponse response) {
+        String userId = request.getParameter("userId");
+
+        //DB 연결
+        Connection con = mydb.getCon();
+        String query = "SELECT * FROM User WHERE userId=" + userId;
+        try {
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            request.setAttribute("info", rs);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return "/mypage.jsp";
+    }
+
     //회원정보 수정
     private String edit(HttpServletRequest request, HttpServletResponse response) {
         //현재 로그인한 유저 아이디
@@ -166,7 +188,7 @@ public class UserController extends HttpServlet {
             e.printStackTrace();
         }
 
-        return "/mypage.jsp";
+        return "/user?action=info&userId=" + currentUserId;
     }
 }
 
